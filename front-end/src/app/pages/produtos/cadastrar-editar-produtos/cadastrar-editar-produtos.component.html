@@ -1,0 +1,52 @@
+<p-toast></p-toast>
+<p-card>
+  <h2 class="text-center mt-3"><span *ngIf="isEditar">Editar Produto</span><span *ngIf="!isEditar">Novo Produto</span>
+  </h2>
+  <div [formGroup]="form">
+    <div class="row mt-3 justify-content-between align-items-center">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <label class="fw-bold">Nome Produto</label><span class="color-red">*</span>
+        <input class="w-100"
+               type="text"
+               formControlName="nome"
+               placeholder="Digite o nome do produto..."
+               pInputText/>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <label class="fw-bold">Preço</label><span class="color-red">*</span>
+        <input class="w-100 text-rigth"
+               type="text"
+               (input)="aplicarMascara()"
+               formControlName="preco"
+               placeholder="Digite o preço do produto..."
+               pInputText/>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <label class="fw-bold">Promoção</label>
+        <p-autoComplete styleClass="w-100" formControlName="promocao"  [suggestions]="promocoesAuto"
+                        (completeMethod)="buscaPromocoes($event)" [dropdown]="true">
+          <ng-template let-promo pTemplate="item">
+            <div>
+              <div>{{promo}}</div>
+            </div>
+          </ng-template>
+        </p-autoComplete>
+      </div>
+      <div class="col-lg-6 col-md-6 col-sm-12">
+        <label class="fw-bold">Quantidade</label><span class="color-red">*</span>
+        <input class="w-100"
+               type="number"
+               formControlName="quantidade"
+               placeholder="Digite a quantidade de produtos..."
+               [min]="1"
+               pInputText/>
+      </div>
+    </div>
+    <div class="row mt-3 justify-content-end">
+        <button pButton class="p-button-primary btnExtension" (click)="salvar()" [disabled]="isLoadingSalvar" label="Salvar"></button>
+    </div>
+  </div>
+</p-card>
+

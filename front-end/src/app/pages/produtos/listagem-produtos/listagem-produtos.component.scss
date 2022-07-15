@@ -1,0 +1,11 @@
+.btnExtension {
+  margin-top: 1rem;
+  @media (max-width: 767.968px) {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
+}
+
+.mRigthBtn{
+  margin-right: 1rem !important;
+}

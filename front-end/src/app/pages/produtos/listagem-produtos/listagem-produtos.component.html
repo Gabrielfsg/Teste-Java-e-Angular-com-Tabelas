@@ -1,0 +1,57 @@
+<p-toast></p-toast>
+<p-card>
+  <h2 class="text-center mt-3">Listagem Produtos</h2>
+  <div [formGroup]="form" class="row mt-3 justify-content-between align-items-center">
+    <div class="col-lg-4 col-md-6 col-sm-12">
+      <label class="fw-bold">Nome Produto</label>
+      <input class="w-100"
+             type="text"
+             formControlName="nome"
+             placeholder="Digite o nome do produto..."
+             pInputText/>
+    </div>
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-end">
+      <button pButton class="p-button-primary btnExtension" label="Novo Produto" (click)="novoProduto()"></button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <div class="col-lg-12 col-md-12 col-sm-12 d-flex justify-content-center">
+      <button pButton class="p-button-primary btnExtension mRigthBtn" (click)="buscarProdutos()" [disabled]="isLoadingBuscar" label="Buscar"></button>
+      <button pButton class="p-button-primary btnExtension" (click)="limpar()" [disabled]="isLoadingBuscar" label="Limpar"></button>
+    </div>
+  </div>
+  <div class="row mt-3">
+    <p-table [value]="produtos" [columns]="colunas" [paginator]="true" [loading]="isLoadingBuscar"  [rows]="4">
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let coluna of columns">{{coluna}}</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-prod>
+        <tr>
+          <td>{{prod.nome}}</td>
+          <td>R$ {{prod.preco | money}}</td>
+          <td>
+            <button pButton class="p-button-warning btnExtension" label="Editar" (click)="editarProduto(prod.id)"  [disabled]="isLoadingBuscar" icon="pi pi-check"></button>
+          </td>
+          <td>
+            <button pButton class="p-button-danger btnExtension" label="Excluir" (click)="excluirProduto(prod.id)" [disabled]="isLoadingBuscar" icon="pi pi-trash"></button>
+          </td>
+          <td>
+            <button pButton class="p-button-primary btnExtension" label="Adicionar ao Carrinho" (click)="adicionarCarrinho(prod.id)"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage" let-columns>
+        <tr>
+          <td [attr.colspan]="columns.length">
+            <span class="d-flex justify-content-center">
+                Nenhum produto encontrado.
+            </span>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</p-card>
+

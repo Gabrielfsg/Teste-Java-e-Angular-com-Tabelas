@@ -1,0 +1,16 @@
+.color-red{
+  color: red !important;
+}
+
+.btnExtension {
+  margin-top: 1rem;
+  width: 10% !important;
+  @media (max-width: 767.968px) {
+    width: 100% !important;
+    margin-top: 2rem;
+  }
+}
+
+.text-rigth {
+  text-align: right !important;
+}
